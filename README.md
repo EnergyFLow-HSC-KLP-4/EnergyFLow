@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # energyflow
 
 A new Flutter project.
@@ -15,7 +14,3 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-=======
-# 04_EnergyFlow
-Pemanfaatan Aliran air Pada Irigasi Sebagai Sumber Energi Terbarukan
->>>>>>> 3a17f2a41fb1a075ce17adffd61e5d649dd77b9c
