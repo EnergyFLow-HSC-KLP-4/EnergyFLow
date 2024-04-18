@@ -1,5 +1,6 @@
 import 'package:energyflow/riwayat_air.dart';
 import 'package:energyflow/riwayat_arus.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -11,7 +12,62 @@ class Beranda extends StatefulWidget {
 }
 
 class _BerandaState extends State<Beranda> {
-  int battery = 65; // Variabel untuk menyimpan nilai battery, awalnya diinisialisasi dengan 0
+  int battery = 0; // Variabel untuk menyimpan nilai battery, awalnya diinisialisasi dengan 0
+  // ignore: non_constant_identifier_names
+  int kuatArus = 0;
+  int kecepatanAir = 0;
+
+  @override
+  void initState(){
+    super.initState();
+    //manggil firebase
+
+    FirebaseDatabase.instance
+        .ref()
+        .child('baterai') // Menggunakan '' sebagai kunci
+        .onValue
+        .listen((event) {
+      print('Nilai dari Firebase: ${event.snapshot.value}');
+      // Memeriksa apakah event.snapshot.value tidak null sebelum mengaksesnya
+      if (event.snapshot.value != null) {
+        // Konversi nilai ke tipe data int
+        setState(() {
+          battery = int.parse(event.snapshot.value.toString());
+        });
+      }
+    });
+
+    FirebaseDatabase.instance
+        .ref()
+        .child('kuat_arus') // Menggunakan '' sebagai kunci
+        .onValue
+        .listen((event) {
+      print('Nilai dari Firebase: ${event.snapshot.value}');
+      // Memeriksa apakah event.snapshot.value tidak null sebelum mengaksesnya
+      if (event.snapshot.value != null) {
+        // Konversi nilai ke tipe data int
+        setState(() {
+          kuatArus = int.parse(event.snapshot.value.toString());
+        });
+      }
+    });
+
+    FirebaseDatabase.instance
+        .ref()
+        .child('kecepatan_air') // Menggunakan '' sebagai kunci
+        .onValue
+        .listen((event) {
+      print('Nilai dari Firebase: ${event.snapshot.value}');
+      // Memeriksa apakah event.snapshot.value tidak null sebelum mengaksesnya
+      if (event.snapshot.value != null) {
+        // Konversi nilai ke tipe data int
+        setState(() {
+          kecepatanAir = int.parse(event.snapshot.value.toString());
+        });
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +135,7 @@ class _BerandaState extends State<Beranda> {
                         ),
                         SizedBox(width: 10), // Spasi antara gambar dan teks
                         Text(
-                          '65%', // Teks yang ingin Anda tambahkan
+                          '$battery%', // Teks yang ingin Anda tambahkan
                           style: TextStyle(
                             fontSize: 31, // Ukuran teks
                             color: Color(0xFFA8E483), // Warna teks
@@ -188,9 +244,9 @@ class _BerandaState extends State<Beranda> {
                                                                 offset: const Offset(1.0, 1.0)),
                                                           ],
                                                         ),
-                                                        child: const Center(
+                                                        child:  Center(
                                                           child: Text(
-                                                            '11 V',
+                                                            '$kuatArus V',
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               color: Colors.black,
@@ -254,11 +310,11 @@ class _BerandaState extends State<Beranda> {
                                 ],
                               ),
                               child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                child: Stack(
+                                  alignment: Alignment.center,
                                   children: [
                                     Container(
-                                      alignment: Alignment(0, -0.5), // Atur posisi teks secara manual
+                                      alignment: Alignment(0, -0.85), // Atur posisi teks secara manual
                                       child: Text(
                                         'Kecepatan Air', // Teks yang ingin Anda tambahkan
                                         style: TextStyle(
@@ -269,8 +325,9 @@ class _BerandaState extends State<Beranda> {
                                       ),
                                     ),
                                     SizedBox(height: 0),
+                                    
                                     Positioned(
-                                      bottom: 50,
+                                      bottom: 40,
                                       child: Container(
                                         width: 150, // Atur lebar sesuai kebutuhan chart
                                         height: 140, // Atur tinggi sesuai kebutuhan chart
@@ -316,9 +373,9 @@ class _BerandaState extends State<Beranda> {
                                                             offset: const Offset(1.0, 1.0)),
                                                       ],
                                                     ),
-                                                    child: const Center(
+                                                    child: Center(
                                                       child: Text(
-                                                        '1 m/s',
+                                                        '$kecepatanAir m/s',
                                                         style: TextStyle(
                                                           fontSize: 20,
                                                           color: Colors.black,
@@ -335,7 +392,7 @@ class _BerandaState extends State<Beranda> {
                                       ),
                                     ),
                                     Positioned(
-                                      top: 16, // Atur posisi vertikal sesuai kebutuhan
+                                      top: 180, // Atur posisi vertikal sesuai kebutuhan
                                       child: ElevatedButton(
                                         onPressed: () {
                                           Navigator.push(

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "434120918916",
+    "firebase_url": "https://energyflow-42fe0-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "energyflow-42fe0",
+    "storage_bucket": "energyflow-42fe0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434120918916:android:cd5721e01e3c4e70cdbfd1",
+        "android_client_info": {
+          "package_name": "com.example.energyflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1uIWViC1DKrZ_Eq3v5KCqmb948ZlMucg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
