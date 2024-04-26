@@ -12,8 +12,7 @@ class Beranda extends StatefulWidget {
 }
 
 class _BerandaState extends State<Beranda> {
-  int battery = 0; // Variabel untuk menyimpan nilai battery, awalnya diinisialisasi dengan 0
-  // ignore: non_constant_identifier_names
+  int battery = 0; 
   int kuatArus = 0;
   int kecepatanAir = 0;
 
@@ -21,7 +20,6 @@ class _BerandaState extends State<Beranda> {
   void initState(){
     super.initState();
     //manggil firebase
-
     FirebaseDatabase.instance
         .ref()
         .child('baterai') // Menggunakan '' sebagai kunci
@@ -77,7 +75,7 @@ class _BerandaState extends State<Beranda> {
       imagePath = 'assets/Battery 0.png';
     } else if (battery <= 30) {
       imagePath = 'assets/Battery 30.png';
-    } else if (battery <= 70) {
+    } else if (battery <= 99) {
       imagePath = 'assets/Battery 70.png';
     } else {
       imagePath = 'assets/Battery 100.png';
@@ -117,7 +115,7 @@ class _BerandaState extends State<Beranda> {
               ),
             ),
             Positioned(
-              top: 170,
+              top: 155,
               left: 0,
               right: 0,
               child: Column(
@@ -145,7 +143,7 @@ class _BerandaState extends State<Beranda> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 35), // Spacer antara gambar dan bentuk di bawahnya
+                  SizedBox(height: 0), // Spacer antara gambar dan bentuk di bawahnya
                   Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -206,18 +204,18 @@ class _BerandaState extends State<Beranda> {
                                               children: [
                                                 PieChart(
                                                   PieChartData(
-                                                    startDegreeOffset: 120,
+                                                    startDegreeOffset: 123,
                                                     sectionsSpace: 0,
                                                     centerSpaceRadius: 50,
                                                     sections: [
                                                       PieChartSectionData(
                                                         value: 45,
-                                                        color: Colors.greenAccent,
+                                                        color: Color(0xFFA8E483),
                                                         radius: 18,
                                                         showTitle: false,
                                                       ),
                                                       PieChartSectionData(
-                                                        value: 20,
+                                                        value: 10,
                                                         color: Colors.grey.shade400,
                                                         radius: 8,
                                                         showTitle: false,
@@ -335,18 +333,18 @@ class _BerandaState extends State<Beranda> {
                                           children: [ 
                                             PieChart(
                                               PieChartData(
-                                                startDegreeOffset: 180,
+                                                startDegreeOffset: 123,
                                                 sectionsSpace: 0,
                                                 centerSpaceRadius: 50,
                                                 sections: [
                                                   PieChartSectionData(
                                                     value: 45,
                                                     color: Colors.blue.shade900,
-                                                    radius: 18,
+                                                    radius: 19,
                                                     showTitle: false,
                                                   ),
                                                   PieChartSectionData(
-                                                    value: 20,
+                                                    value: 10,
                                                     color: Colors.grey.shade400,
                                                     radius: 8,
                                                     showTitle: false,
