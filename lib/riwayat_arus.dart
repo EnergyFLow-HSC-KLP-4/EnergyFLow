@@ -25,10 +25,12 @@ class _RiwayatArusState extends State<RiwayatArus> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 50.0, left: 5.0, right: 8.0),
+                      padding:
+                          EdgeInsets.only(top: 50.0, left: 5.0, right: 8.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pop(context); // Kembali ke halaman sebelumnya
+                          Navigator.pop(
+                              context); // Kembali ke halaman sebelumnya
                         },
                         child: Image.asset(
                           'assets/kembali.png',
@@ -43,7 +45,8 @@ class _RiwayatArusState extends State<RiwayatArus> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 50.0, left: 10.0, right: 8.0),
+                      padding:
+                          EdgeInsets.only(top: 50.0, left: 10.0, right: 8.0),
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Column(
@@ -52,11 +55,17 @@ class _RiwayatArusState extends State<RiwayatArus> {
                           children: [
                             Text(
                               'Riwayat Pemantauan',
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Arus listrik',
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -64,12 +73,17 @@ class _RiwayatArusState extends State<RiwayatArus> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10), // Padding untuk memberi ruang agar tabel tidak tumpang tindih dengan tombol kembali
+                SizedBox(
+                    height:
+                        10), // Padding untuk memberi ruang agar tabel tidak tumpang tindih dengan tombol kembali
                 Container(
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(16),
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection('riwayat_arus').orderBy('waktu').snapshots(),
+                    stream: FirebaseFirestore.instance
+                        .collection('riwayat_arus')
+                        .orderBy('waktu')
+                        .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return CircularProgressIndicator();
@@ -82,64 +96,93 @@ class _RiwayatArusState extends State<RiwayatArus> {
                         columnSpacing: 44, // Atur jarak antar kolom
                         dataRowHeight: 50, // Atur tinggi baris data
                         headingRowHeight: 70, // Atur tinggi baris header
-                        decoration: BoxDecoration( // Atur dekorasi tabel
-                          color: const Color.fromARGB(255, 16, 87, 122), // Warna latar belakang tabel
-                          borderRadius: BorderRadius.circular(10), // Bentuk border tabel
+                        decoration: BoxDecoration(
+                          // Atur dekorasi tabel
+                          color: const Color.fromARGB(
+                              255, 16, 87, 122), // Warna latar belakang tabel
+                          borderRadius:
+                              BorderRadius.circular(10), // Bentuk border tabel
                         ),
                         columns: [
                           DataColumn(
                             label: Container(
-                              alignment: Alignment.centerLeft, // Mengatur posisi teks ke kiri
-                              padding: EdgeInsets.only(left: 15.0), // Geser teks ke kanan sejauh 15 piksel
+                              alignment: Alignment
+                                  .centerLeft, // Mengatur posisi teks ke kiri
+                              padding: EdgeInsets.only(
+                                  left:
+                                      15.0), // Geser teks ke kanan sejauh 15 piksel
                               child: Text(
                                 'Waktu',
-                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
                           DataColumn(
-                            label: Text('Arus Masuk', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                            label: Text('Arus Masuk',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
                           ),
                           DataColumn(
-                            label: Text('Arus Keluar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                            label: Text('Arus Keluar',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ],
-                        rows: snapshot.data!.docs.map((DocumentSnapshot document) {
-                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                        rows: snapshot.data!.docs
+                            .map((DocumentSnapshot document) {
+                          Map<String, dynamic> data =
+                              document.data() as Map<String, dynamic>;
                           // Konversi timestamp Firestore ke DateTime
-                          DateTime waktu = (data['waktu'] as Timestamp).toDate();
+                          DateTime waktu =
+                              (data['waktu'] as Timestamp).toDate();
                           // Format DateTime menjadi string dengan format yang diinginkan
                           return DataRow(
                             cells: [
                               DataCell(
                                 Column(
-                                  mainAxisAlignment: MainAxisAlignment.center, // Atur posisi teks di tengah secara horizontal
-                                  crossAxisAlignment: CrossAxisAlignment.center, // Atur posisi teks di tengah secara vertikal
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Atur posisi teks di tengah secara horizontal
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .center, // Atur posisi teks di tengah secara vertikal
                                   children: [
-                                    Text(DateFormat('yyyy-MM-dd').format(waktu), style: TextStyle(color: Colors.white)),
-                                    Text(DateFormat('HH:mm:ss').format(waktu), style: TextStyle(color: Colors.white)),
+                                    Text(DateFormat('yyyy-MM-dd').format(waktu),
+                                        style: TextStyle(color: Colors.white)),
+                                    Text(DateFormat('HH:mm:ss').format(waktu),
+                                        style: TextStyle(color: Colors.white)),
                                   ],
                                 ),
                               ),
                               DataCell(
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.center, // Atur posisi teks di tengah secara horizontal
-                                  crossAxisAlignment: CrossAxisAlignment.center, // Atur posisi teks di tengah secara vertikal
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Atur posisi teks di tengah secara horizontal
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .center, // Atur posisi teks di tengah secara vertikal
                                   children: [
-                                    Text(data['arus_masuk'].toString(), style: TextStyle(color: Colors.white)),
+                                    Text(data['arus_masuk'].toString(),
+                                        style: TextStyle(color: Colors.white)),
                                     SizedBox(width: 5), // Spacer
-                                    Text('V', style: TextStyle(color: Colors.white)),
+                                    Text('V',
+                                        style: TextStyle(color: Colors.white)),
                                   ],
                                 ),
                               ),
                               DataCell(
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.center, // Atur posisi teks di tengah secara horizontal
-                                  crossAxisAlignment: CrossAxisAlignment.center, // Atur posisi teks di tengah secara vertikal
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Atur posisi teks di tengah secara horizontal
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .center, // Atur posisi teks di tengah secara vertikal
                                   children: [
-                                    Text(data['arus_keluar'].toString(), style: TextStyle(color: Colors.white)),
+                                    Text(data['arus_keluar'].toString(),
+                                        style: TextStyle(color: Colors.white)),
                                     SizedBox(width: 5), // Spacer
-                                    Text('V', style: TextStyle(color: Colors.white)),
+                                    Text('V',
+                                        style: TextStyle(color: Colors.white)),
                                   ],
                                 ),
                               ),
