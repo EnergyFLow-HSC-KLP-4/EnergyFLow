@@ -66,7 +66,6 @@ class _BerandaState extends State<Beranda> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     // Menentukan path gambar berdasarkan nilai variabel battery
