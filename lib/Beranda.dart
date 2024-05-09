@@ -243,7 +243,7 @@ class _BerandaState extends State<Beranda> {
                                                         ),
                                                         child:  Center(
                                                           child: Text(
-                                                            '$kuatArus V',
+                                                            '$kuatArus A',
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               color: Colors.black,
