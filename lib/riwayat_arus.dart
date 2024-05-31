@@ -155,7 +155,7 @@ class _RiwayatArusState extends State<RiwayatArus> {
                                 ),
                                 SizedBox(width: 5),
                                 Text(
-                                  'A',
+                                  'mA',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ],
@@ -173,7 +173,7 @@ class _RiwayatArusState extends State<RiwayatArus> {
                                 ),
                                 SizedBox(width: 5),
                                 Text(
-                                  'A',
+                                  'mA',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ],
